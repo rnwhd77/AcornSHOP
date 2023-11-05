@@ -1,0 +1,161 @@
+drop view order_view;
+drop view cart_view;
+drop sequence order_detail_seq ;
+drop table order_detail;
+drop sequence orders_seq;  
+drop table orders;
+drop sequence qna_seq;
+drop table qna;
+drop sequence cart_seq;
+drop table cart;
+drop sequence preview_seq;
+drop table p_review;
+drop sequence pans_seq;
+drop table p_ans;
+drop sequence pqna_seq;
+drop table p_qna;
+drop sequence product_seq;
+drop table product;
+drop table users;
+
+
+create table users(
+    id varchar2(20) primary key,
+    pwd varchar2(20),
+    name varchar2(20),
+    email varchar2(40),
+    address varchar2(100),
+    phone varchar2(20),
+    signdate date default sysdate
+);
+
+create table product(
+    prodnum number(5) primary key,
+    name varchar2(200) not null,
+    price number(7) default 0,
+    sale number(7) default 0,
+    content varchar2(1000) default null,
+    image varchar2(50) default 'default.jpg',
+    useyn varchar2(1) default 'y',
+    regdate date default sysdate
+);
+create sequence product_seq start with 1 increment by 1;
+
+create table p_review(
+    revnum number(10) primary key,
+    prodnum number(8),
+    id varchar2(20),
+    content varchar2(200),
+    star number(1),
+    revdate Date default sysdate,
+    constraint fk_revid foreign key(id) references users(id),
+    constraint fk_revprodnum foreign key(prodnum) references product(prodnum)
+);
+create sequence preview_seq start with 1 increment by 1;
+
+create table p_qna(
+    qnanum number(10) primary key,
+    prodnum number(8),
+    id varchar2(20),
+    title varchar2(100),
+    content varchar2(200),
+    revdate Date default sysdate,
+    rls_yn varchar2(1) default 'y',
+    ans_yn varchar2(1),
+    constraint fk_qnaid foreign key(id) references users(id),
+    constraint fk_qnaprodnum foreign key(prodnum) references product(prodnum)
+);
+create sequence pqna_seq start with 1 increment by 1;
+
+create table p_ans(
+    ansnum number(10) primary key,
+    qnanum number(8),
+    content varchar2(200),
+    revdate Date default sysdate,
+    constraint fk_ansnum foreign key(qnanum) references p_qna(qnanum)
+);
+create sequence pans_seq start with 1 increment by 1;
+
+create table cart(
+    cartnum number(8) primary key,
+    id varchar2(20),
+    prodnum number(5),
+    quantity number(5) default 1,
+    price number(10),
+    constraint fk_id foreign key(id) references users(id),
+    constraint fk_prodnum foreign key(prodnum) references product(prodnum)
+);
+
+     create sequence cart_seq start with 1 increment by 1;
+
+create table qna(
+    qseq number(5) primary key,
+    subject varchar2(30),
+    content varchar2(1000),
+    reply varchar2(1000),
+    id varchar2(20),
+    rep char(1) default 1,
+    indate date default sysdate,
+    constraint fk_qna_id foreign key(id) references users(id));
+
+create sequence qna_seq start with 1 increment by 1;
+
+
+create table orders(
+    ordernum number(10) primary key,
+    id varchar2(20),
+    indate date default sysdate,
+    constraint fk_order_id foreign key(id) references users(id));
+  
+create sequence orders_seq start with 1 increment by 1;
+
+
+create table order_detail(
+    odnum number(10) primary key,
+    ordernum number(10),
+    prodnum number(5),
+    quantity number(5),
+    result char(1) default 1,
+    constraint fk_order_detail foreign key(ordernum) references orders(ordernum),
+    constraint fk_prod_detail foreign key(prodnum) references product(prodnum));
+
+    create sequence order_detail_seq start with 1 increment by 1;
+
+create or replace view cart_view
+as
+select o.cartnum, o.id, o.prodnum, m.name username, p.name pname, 
+o.quantity, p.sale 
+from cart o, users m, product p 
+where o.id = m.id and o.prodnum = p.prodnum;
+
+
+create or replace view order_view
+as
+select d.odnum, o.ordernum, o.id, o.indate, d.prodnum, d.quantity, m.name username,
+m.address, m.phone, p.name pname, p.sale, d.result   
+from orders o, order_detail d, users m, product p 
+where o.ordernum=d.ordernum and o.id = m.id and d.prodnum = p.prodnum;
+
+
+INSERT INTO USERS VALUES('TEST','1234','TEST','TT@TT.COM','ACORN','010-0000-0000',SYSDATE);
+insert into users values('id','password','name', 'email','address', '01012345677',sysdate);
+
+insert into product values(1100,'상품명',10000, 9000,'이 상품은 예제입니다', 'bag1.png', 'y', sysdate);
+insert into product values(1200,'상품명2',11000, 10000,'이 상품은 예제2입니다', 'bag2.png','y', sysdate);
+insert into product values(1300,'상품명3',14000, 12000,'이 상품은 예제3입니다', 'bag3.png','y', sysdate);
+insert into product values(1400,'상품명4',14000, 12000,'이 상품은 예제4입니다', 'bag4.png','y', sysdate);
+
+insert into p_qna values(pqna_seq.nextval,1400,'id','가나다라마바사','내용', sysdate, 'y', 'n');
+insert into p_qna values(pqna_seq.nextval,1200,'TEST','환불 문의', '환불은 어디로 진행하면 되나요', sysdate, 'n', 'n');
+insert into p_qna values(pqna_seq.nextval,1100,'id','재판매 예정이 있으신가요','제곧내', sysdate, 'n', 'n');
+insert into p_qna values(pqna_seq.nextval,1100,'TEST','상품 언제 오나요','내용', sysdate, 'y', 'n');
+
+insert into p_review values(preview_seq.nextval,1200,'TEST','오...', 3, sysdate);
+insert into p_review values(preview_seq.nextval,1400,'id','이게뭐지', 4, sysdate);
+insert into p_review values(preview_seq.nextval,1300,'id','보통', 3, sysdate);
+insert into p_review values(preview_seq.nextval,1100,'id','그럭저럭 괜찮음', 4, sysdate);
+insert into p_review values(preview_seq.nextval,1100,'TEST','강추^^', 5, sysdate);
+
+commit;
+
+select * from product;

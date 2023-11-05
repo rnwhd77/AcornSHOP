@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+body {
+  background-color: #F8F2F4;
+}
+
+table {
+  border-collapse: collapse;
+  width: 500px;
+  margin: 1rem auto;
+    background-color: white;
+}
+
+/* 테이블 행 */
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #1b1b1b;
+  color: #ddd;
+}
+
+/* 테이블 올렸을 때 */
+tbody tr:hover {
+  color: #1b1b1b;
+  background-color: rgb(192, 192, 192);
+  opacity: 0.8;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* 테이블 비율 */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 15%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 55%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 30%;
+}
+
+th, td {
+  border-left: none;
+  border-right: none;
+}

@@ -1,0 +1,147 @@
+@charset "UTF-8";
+/* top.jsp */
+
+body, ul, li {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   margin: 0;
+}
+
+#logoimg {
+   background-image: url("image/logo1.gif");
+}
+
+header {
+   height: 130px;
+   background: rgba(0, 0, 0, 0.9);
+   border: 1px solid #253342;
+   position: fixed;
+   width: 100%;
+   z-index: 1;
+   float: left;
+   top: 0;
+   left: 0;
+}
+
+#mainimg {
+   left: 0px;
+   top: 0px;
+   position: relative;
+   z-index: -100;
+}
+
+.logintext {
+   color: #FFF;
+   font-size: 0.8em;
+   text-decoration: none;
+}
+
+.logoimg {
+   line-height: 75px;
+   float: left;
+}
+/*    로고 이미지 */
+
+
+
+#cartimg {
+   height: 40px;
+}
+
+
+.loginform {
+   float: right;
+}
+
+/* 상단 이미지 */
+
+
+.wrapper {
+   width: 1800px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+:root {
+   --site-width: 1200px;
+}
+
+/*.wrapper-min-width {
+   min-width: var(--site-width); /*사이트 너비 설정 */ 
+
+.wrapper{width:1800px; margin: 0 0 50px;}
+.menu {
+   float: right;
+   padding: 70px 100px 50px 0;
+   margin: 0;
+   font-size: 0.95em;
+   height: 60px;
+   
+}/* 메뉴들 설정 */
+.menu li {
+   float: left;
+   list-style: none;
+   
+}
+
+.menu a {
+   padding: 0 15px;
+   color: white;
+   text-decoration: none;
+}
+
+
+.top-bar__menu-box > ul ul {
+   display: none;
+} /* 드롭다운 메뉴 숨기기*/
+.top-bar__menu-box>ul>li {
+   display: inline-block;
+   position: relative;
+}
+
+.top-bar__menu-box>ul>li>ul {
+   position: absolute;
+   top: 100%;
+   right: 0px;
+   width: 100%;
+} /* 드롭다운 메뉴 크기*/
+.top-bar__menu-box>ul>li:hover>ul {
+   display: block;
+}
+
+
+.top-bar__menu-box ul > li > a {
+   display: block;
+   font-size: 1.2rem;
+   padding: 10px 50px;
+   /*border: 10px solid red;  메뉴 크기 확인*/ 
+}
+
+
+.top-bar__menu-box > ul > li:hover:not(.cartimg) > a {
+   background-color: #555;
+   border-radius:10px;
+}/* 탑 바 속성 */
+
+
+.top-bar__menu-box ul > li > ul > li > a {
+   color: black;
+   background-color : whitesmoke;
+   border: 0.5px solid black;
+   border-radius:10px;
+   
+} /* 드롭다운 메뉴 */
+
+a:hover , a:active  {
+  opacity: 0.8;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* top.jsp */
+
+/* main.jsp */
+
+/* main.jsp */

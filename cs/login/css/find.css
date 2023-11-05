@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+body {
+	text-align: center;
+	background: whitesmoke;
+}
+h2{
+	margin-top: 100px;
+	
+}
+#Findiv {
+	text-align: center;
+	margin-top: 50px;
+	border: 0.5px solid;
+	width:400px;
+	margin : 0 auto;
+}
+
+div  input {
+	margin-top: 20px;
+	margin-bottom: 15px;
+	border-radius:5px;
+}
+
+#textbox{
+	width:200px;
+	height: 30px;
+}
+#btnbox{
+	position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    background-color: #77af9c;
+    color: #d7fff1;
+}
+#btnbox:hover{
+	 cursor: pointer;
+	background: silver;
+    border-radius: 30%;
+    border-bottom: 5px solid slateblue;
+}
